@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,11 +69,17 @@ class CoffeeOrderBoardTest {
         assertEquals(expectedOrders, coffeeOrderBoard.getOrders());
     }
 
-    @Test
-    void deliverSpecificOrder_notInQueueReturnsNull() {
-        Order actualNullOrderOrder = coffeeOrderBoard.deliver(ORDER5.getOrderNumber());
+    //if we wouldn't use exception in public Order deliver(int orderNumber) method
+//    @Test
+//    void deliverSpecificOrder_notInQueueReturnsNull() {
+//        Order actualNullOrderOrder = coffeeOrderBoard.deliver(100);
+//
+//        assertNull(actualNullOrderOrder);
+//    }
 
-        assertNull(actualNullOrderOrder);
+    @Test
+    void deliverSpecificOrder_notInQueueThrowsException() {
+        assertThrows(NoSuchElementException.class, () -> coffeeOrderBoard.deliver(100));
     }
 
     @Test

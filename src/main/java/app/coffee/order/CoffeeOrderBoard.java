@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 @Slf4j
@@ -57,6 +58,7 @@ public class CoffeeOrderBoard {
             log.info("Order {} delivered", orderToDeliver.getOrderNumber());
         } else {
             log.error("No order {} in queue", orderNumber);
+            throw new NoSuchElementException();//Added only for the sake of #22 task to print stacktrace in case of exception
         }
         return orderToDeliver;
     }
